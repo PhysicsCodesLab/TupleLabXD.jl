@@ -20,11 +20,12 @@ and
 StaticLength(N₁) - StaticLength(N₂) == StaticLength(max(0, N₁-N₂))
 ```
 """
-struct StaticLength{N}
-end
+struct StaticLength{N} end
 Base.@pure StaticLength(N::Int) = StaticLength{N}()
-Base.@pure Base.:+(::StaticLength{N₁}, ::StaticLength{N₂}) where {N₁,N₂} = StaticLength(N₁+N₂)
-Base.@pure Base.:-(::StaticLength{N₁}, ::StaticLength{N₂}) where {N₁,N₂} = StaticLength(max(0,N₁-N₂))
+Base.@pure Base.:+(::StaticLength{N₁}, ::StaticLength{N₂}) where {N₁,N₂} =
+    StaticLength(N₁+N₂)
+Base.@pure Base.:-(::StaticLength{N₁}, ::StaticLength{N₂}) where {N₁,N₂} =
+    StaticLength(max(0,N₁-N₂))
 
 @inline Base.ntuple(f, ::StaticLength{N}) where {N} = ntuple(f, Val{N}())
 
@@ -41,9 +42,11 @@ Base.@propagate_inbounds function Base.getindex(t::MutableNTuple{N,T}, i::Int) w
     GC.@preserve t unsafe_load(Base.unsafe_convert(Ptr{T}, pointer_from_objref(t)), i)
 end
 
-Base.@propagate_inbounds function Base.setindex!(t::MutableNTuple{N,T}, val, i::Int) where {N,T}
+Base.@propagate_inbounds function Base.setindex!(t::MutableNTuple{N,T}, val,
+                                                    i::Int) where {N,T}
     @boundscheck checkbounds(Base.OneTo(N),i)
-    GC.@preserve t unsafe_store!(Base.unsafe_convert(Ptr{T}, pointer_from_objref(t)), convert(T, val), i)
+    GC.@preserve t unsafe_store!(Base.unsafe_convert(Ptr{T}, pointer_from_objref(t)),
+                                    convert(T, val), i)
     return t
 end
 
@@ -330,17 +333,6 @@ function isperm(p::Tuple{Int,Int,Int,Int})
                 p[1] == p[2] || p[1] == p[3] || p[1] == p[4] ||
                 p[2] == p[3] || p[2] == p[4] || p[3] == p[4])
 end
-
-# function isperm(p)
-#     N = length(p)
-#     @inbounds for i = 1:N
-#         1 <= p[i] <= N || return false
-#         for j = i+1:N
-#             p[i] == p[j] && return false
-#         end
-#     end
-#     return true
-# end
 
 """
     invperm(p::NTuple{N,Int}) -> ::NTuple{N,Int}
