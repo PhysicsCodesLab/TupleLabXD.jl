@@ -1,7 +1,7 @@
 """
 Type stable methods for small tuples
 """
-module TupleToolXD
+module TupleManipulationsXD
 
 using Base: tuple_type_head, tuple_type_tail, tuple_type_cons, tail, front, setindex
 
