@@ -253,11 +253,22 @@ end
 _sort(t::Tuple{Any}, lt=isless, by=identity, rev::Bool=false) = t
 _sort(t::Tuple{}, lt=isless, by=identity, rev::Bool=false) = t
 
+"""
+	_split(t::NTuple{N}) where N
+
+Split the NTuple with length N into two NTuple at the half point.
+"""
 function _split(t::NTuple{N}) where N
     M = N>>1
     ntuple(i->t[i], M), ntuple(i->t[i+M], N-M)
 end
 
+"""
+    _merge(t1::Tuple, t2::Tuple, lt, by, rev)
+
+Merge two sequence in the order determined by `lt=isless`, `by=identity`, and
+`rev::Bool=false`.
+"""
 function _merge(t1::Tuple, t2::Tuple, lt, by, rev)
     if lt(by(first(t1)), by(first(t2))) != rev
         return (first(t1), _merge(tail(t1), t2, lt, by, rev)...)
@@ -272,7 +283,6 @@ _merge(::Tuple{}, ::Tuple{}, lt, by, rev) = ()
 
 """
     sortperm(t::Tuple; lt=isless, by=identity, rev::Bool=false) -> ::Tuple
-
 
 Computes a tuple that contains the permutation required to sort `t`.
 """
