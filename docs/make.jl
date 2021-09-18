@@ -1,16 +1,16 @@
-using TupleManipulationsXD
+using TupleLabXD
 using Documenter
 
-DocMeta.setdocmeta!(TupleManipulationsXD, :DocTestSetup, :(using TupleManipulationsXD); recursive=true)
+DocMeta.setdocmeta!(TupleLabXD, :DocTestSetup, :(using TupleLabXD); recursive=true)
 
 makedocs(;
-    modules=[TupleManipulationsXD],
+    modules=[TupleLabXD],
     authors="PhysicsCodesLab",
-    repo="https://github.com/PhysicsCodesLab/TupleManipulationsXD.jl/blob/{commit}{path}#{line}",
-    sitename="TupleManipulationsXD.jl",
+    repo="https://github.com/PhysicsCodesLab/TupleLabXD.jl/blob/{commit}{path}#{line}",
+    sitename="TupleLabXD.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://PhysicsCodesLab.github.io/TupleManipulationsXD.jl",
+        canonical="https://PhysicsCodesLab.github.io/TupleLabXD.jl",
         assets=String[],
     ),
     pages=[
@@ -19,6 +19,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/PhysicsCodesLab/TupleManipulationsXD.jl",
+    repo="github.com/PhysicsCodesLab/TupleLabXD.jl",
     devbranch="master",
 )
