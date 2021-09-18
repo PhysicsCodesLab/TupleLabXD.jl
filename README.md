@@ -5,4 +5,5 @@
 [![Build Status](https://github.com/PhysicsCodesLab/TupleLabXD.jl/workflows/CI/badge.svg)](https://github.com/PhysicsCodesLab/TupleLabXD.jl/actions)
 [![Coverage](https://codecov.io/gh/PhysicsCodesLab/TupleLabXD.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/PhysicsCodesLab/TupleLabXD.jl)
 
-### [Note!] This is just a personal use package to learn TupleTool.jl developed by Jutho. A few modifications will be made by me based on the codes copied from Jutho's github.
+### [Note!] The main source codes comes from Jutho's package TupleTools.jl. Further changes made by PhysicsCodesLab.
+
